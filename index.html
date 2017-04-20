@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Document</title>
+    <link href="normalize.css" type="text/css" rel="stylesheet">
+	<style>
+        .mani{
+            height: 45vw;
+            width:50vw;
+            
+            margin:auto;
+        }
+        .mani_def{
+            margin:1vw;
+            height:8vw;
+            width: 8vw;
+            box-sizing: border-box;
+            display:inline-block;
+            background: url("Безымянный.png")  50%/cover;
+            transition: all 1s ease-in-out;
+        }
+        @keyframes jew0{
+            from{background: url('1914357.jpg') 50%/cover}
+            to{background: url("question-mark-460864_640.png") 50%/cover}
+        }
+        @keyframes jew1{
+            from{background: url('jjj.jpg') 50%/cover}
+            to{background: url("668968_question_512x512.png") 50%/cover}
+        }
+        .cony{
+            position:absolute;
+            left:30vw;
+            top:5vw;
+            font-size:6vw;
+            color:chocolate;
+            z-index: 2;
+        }
+    </style>
+	
+</head>
+<body>
+  <div class="mani" id="mani1">
+      
+  </div>
+    <script>
+       'use strict';
+        alert("Отгадай загадку!");
+        let j;
+        let images=['1914357.jpg','jjj.jpg'];
+        let newDiv;
+        let last;
+        let next;
+        let cong=[1];
+        for (let i=0;i<20;i++) {
+            newDiv=document.createElement('div');
+            newDiv.className=String(i%2)+'num mani_def';
+            newDiv.style.animation="jew"+String(i%2)+" 6s ease-in-out normal";
+            newDiv.addEventListener('click',function(e){
+                j=parseInt(e.currentTarget.className);
+                e.currentTarget.style.background="url('"+images[j]+"') 50%/cover";
+                let f=e.currentTarget;
+                setTimeout(function(){f.style.background="url('Безымянный.png') 50%/cover";  },3000);
+                if (last){
+                    next=e.currentTarget;
+                    if ((last.className==next.className)&&(last!=next)){
+                        setTimeout(function(){     
+                            mani1.removeChild(next);
+                            mani1.removeChild(last);
+                            next=false;
+                            last=false;
+                            cong=mani1.children;
+                            if (cong.length==0){
+                                let newDiv1=document.createElement('div');
+                                newDiv1.classList.add('cony');
+                                newDiv1.innerHTML="<p>Поздравляем!</p><p>Вы отгадали загадку!</p>";
+                                document.body.appendChild(newDiv1);
+                            }
+                        },1500)
+                    }
+                    else{
+                        last=next;
+                        next=false;
+                    }
+                }
+                else{
+                    last=e.currentTarget;
+                }
+            });
+            
+            mani1.appendChild(newDiv);
+        }
+        
+    </script>  
+</body>
+</html>
